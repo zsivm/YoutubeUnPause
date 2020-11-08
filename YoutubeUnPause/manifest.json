@@ -1,0 +1,22 @@
+{
+    "name": "Youtube UnPause",
+    "version": "2.0",
+    "description": "This extension automatically presses the 'Are you still watching?' button for you.",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_title": "Youtube UnPause"
+    },
+    "permissions": [
+        "activeTab"
+    ],
+    "manifest_version": 2
+  }
