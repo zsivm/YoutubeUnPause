@@ -1,24 +1,37 @@
 const elementToObserve = document.querySelector("ytd-popup-container");
 
 const observer = new MutationObserver(() => {
+
     console.log("yt-popup-container got a child element");
-    observer.disconnect();
-    removeAllChildNodes(elementToObserve);
-    console.log("Removed all children from yt-popup-container");
-    // todo: emulate click required?
-    this.activateObserver();
-    console.log("Observer is watching again!");
+
+    let confirmPopup = document.querySelector("yt-confirm-dialog-renderer");
+
+    console.log("confirmPopup content", confirmPopup);
+    
+    if(confirmPopup) {
+
+        console.log("The confirm popup appeared");
+        observer.disconnect();
+        
+        clickButton();
+        removeConfirmPopup(confirmPopup);
+        activateObserver();
+    }
 });
 
 this.activateObserver();
-console.log("Observer is watching!");
 
-function removeAllChildNodes(parent) {
-    while(parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+function clickButton() {
+    document.getElementById("confirm-button").click();
+    console.log("Confirm button clicked");
+}
+
+function removeConfirmPopup(confirmPopup) {
+    elementToObserve.removeChild(confirmPopup);
+    console.log("Removed confirmPopup from parent");
 }
 
 function activateObserver() {
     observer.observe(elementToObserve, {subtree: true, childList: true});
+    console.log("Observer is watching");
 }
